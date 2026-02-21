@@ -25,8 +25,8 @@ export default function SidebarAdmin() {
   ];
 
   const handleLogout = () => {
-    logout();
     navigate('/');
+    logout();
   };
 
   useEffect(() => {

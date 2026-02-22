@@ -253,52 +253,52 @@ export default function ManageModule() {
           </table>
         </div>
 
-        {filteredModules.length > 0 && (
-          <div className="p-6 border-t border-gray-100 dark:border-gray-700 flex items-center justify-between bg-gray-50/30 dark:bg-gray-900/30">
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              Menampilkan <span className="font-bold text-gray-900 dark:text-white">{paginatedModules.length}</span> dari <span className="font-bold text-gray-900 dark:text-white">{filteredModules.length}</span> modul
-            </p>
-            <div className="flex items-center gap-2">
-              <button
-                disabled={currentPage === 1}
-                onClick={() => setCurrentPage(prev => prev - 1)}
-                className="p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-white dark:hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-gray-600 dark:text-gray-400"
-              >
-                <ChevronLeft size={20} />
-              </button>
-              <div className="flex items-center gap-1">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                  <button
-                    key={page}
-                    onClick={() => setCurrentPage(page)}
-                    className={cn(
-                      "w-10 h-10 rounded-lg font-bold text-sm transition-all",
-                      currentPage === page
-                        ? "bg-sky-500 text-white shadow-lg shadow-sky-500/20"
-                        : "text-gray-500 hover:bg-white dark:hover:bg-gray-800 border border-transparent hover:border-gray-200 dark:hover:border-gray-700"
-                    )}
-                  >
-                    {page}
-                  </button>
-                ))}
-              </div>
-              <button
-                disabled={currentPage === totalPages}
-                onClick={() => setCurrentPage(prev => prev + 1)}
-                className="p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-white dark:hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-gray-600 dark:text-gray-400"
-              >
-                <ChevronRight size={20} />
-              </button>
-            </div>
-          </div>
-        )}
-
         {filteredModules.length === 0 && (
           <div className="p-20 text-center">
             <p className="text-gray-500 dark:text-gray-400">Tidak ada modul yang ditemukan.</p>
           </div>
         )}
       </div>
+
+      {filteredModules.length > 0 && (
+        <div className="p-6 flex items-center justify-between">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            Menampilkan <span className="font-bold text-gray-900 dark:text-white">{paginatedModules.length}</span> dari <span className="font-bold text-gray-900 dark:text-white">{filteredModules.length}</span> modul
+          </p>
+          <div className="flex items-center gap-2">
+            <button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage(prev => prev - 1)}
+              className="p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-white dark:hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-gray-600 dark:text-gray-400"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <div className="flex items-center gap-1">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={cn(
+                    "w-10 h-10 rounded-lg font-bold text-sm transition-all",
+                    currentPage === page
+                      ? "bg-sky-500 text-white shadow-lg shadow-sky-500/20"
+                      : "text-gray-500 hover:bg-white dark:hover:bg-gray-800 border border-transparent hover:border-gray-200 dark:hover:border-gray-700"
+                  )}
+                >
+                  {page}
+                </button>
+              ))}
+            </div>
+            <button
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage(prev => prev + 1)}
+              className="p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-white dark:hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-gray-600 dark:text-gray-400"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+        </div>
+      )}
 
       <ModalForm
         isOpen={isModalOpen}

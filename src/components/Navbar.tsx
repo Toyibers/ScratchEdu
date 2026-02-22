@@ -1,9 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
-import { BookOpen, ShieldCheck, LayoutDashboard } from 'lucide-react';
+import { BookOpen, ShieldCheck, LayoutDashboard, Sun, Moon } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 
 export default function Navbar() {
   const { user } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
 
   const isAdminPage = location.pathname.startsWith('/admin');
@@ -23,13 +25,19 @@ export default function Navbar() {
         </Link>
 
         <div className="flex items-center gap-4">
+          <button 
+            onClick={toggleTheme}
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          >
+            {theme === 'dark' ? <Sun size={20} className="text-yellow-400" /> : <Moon size={20} className="text-gray-600" />}
+          </button>
+
           {user ? (
             <Link
               to="/admin"
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-sky-500 text-white hover:bg-sky-600 transition-colors font-medium"
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-sky-500 text-white hover:bg-sky-600 transition-colors font-medium"
             >
               <LayoutDashboard size={18} />
-              <span className="hidden sm:inline">Dashboard</span>
             </Link>
           ) : (
             <Link
@@ -37,7 +45,7 @@ export default function Navbar() {
               className="flex items-center gap-2 px-4 py-2 rounded-xl border border-sky-500 text-sky-500 hover:bg-sky-50 dark:hover:bg-gray-800 transition-colors font-medium"
             >
               <ShieldCheck size={18} />
-              <span>Admin</span>
+              <span className="hidden sm:inline">Admin</span>
             </Link>
           )}
         </div>
